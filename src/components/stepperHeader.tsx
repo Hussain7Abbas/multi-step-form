@@ -18,7 +18,7 @@ const StepperHeader = () => {
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 activeStep >= step.id
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-primary text-primary-foreground'
                   : 'bg-gray-200 text-gray-600'
               }`}
             >
@@ -28,7 +28,7 @@ const StepperHeader = () => {
             {/* Step label */}
             <div
               className={`mt-2 text-sm text-center w-40 absolute top-8 ${
-                activeStep >= step.id ? 'text-blue-600 font-medium' : 'text-gray-500'
+                activeStep >= step.id ? 'text-primary font-medium' : 'text-gray-500'
               }`}
             >
               {step.name}
@@ -40,7 +40,7 @@ const StepperHeader = () => {
             <div className="flex-1 h-1">
               <div
                 className={`h-full ${
-                  activeStep > step.id ? 'bg-blue-600' : 'bg-gray-200'
+                  activeStep > step.id ? 'bg-primary' : 'bg-gray-200'
                 }`}
               />
             </div>
