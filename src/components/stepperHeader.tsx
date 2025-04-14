@@ -1,16 +1,48 @@
 import React from 'react';
 
+export interface Step {
+  id: number;
+  name: string;
+  noBackNavigate?: boolean;
+  isFilled?: boolean;
+}
 interface StepperHeaderProps {
-  steps: { id: number; name: string }[];
+  steps: Step[];
   activeStep: number;
+  setActiveStep: (step: number) => void;
 }
 
-const StepperHeader = ({ steps, activeStep = 1 }: StepperHeaderProps) => {
+export const StepperHeader = ({
+  steps,
+  activeStep = 1,
+  setActiveStep,
+}: StepperHeaderProps) => {
+  function handleStepClick(stepId: number) {
+    // handle back navigation
+    if (activeStep > stepId && steps[stepId - 1].noBackNavigate) {
+      return;
+    }
+    // handle forward navigation
+    if (activeStep < stepId && !steps[stepId - 1].isFilled) {
+      return;
+    }
+    setActiveStep(stepId);
+  }
+
   return (
-    <div className="flex items-center justify-between md:mx-16">
+    <div className="flex items-center justify-between md:mx-16 mb-8">
       {steps.map((step, index) => (
         <React.Fragment key={step.id}>
-          <div className="flex flex-col items-center relative">
+          <button
+            type="button"
+            className="flex flex-col items-center relative cursor-pointer"
+            onClick={() => handleStepClick(step.id)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                handleStepClick(step.id);
+              }
+            }}
+          >
             {/* Step circle */}
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center ${
@@ -30,7 +62,7 @@ const StepperHeader = ({ steps, activeStep = 1 }: StepperHeaderProps) => {
             >
               {step.name}
             </div>
-          </div>
+          </button>
 
           {/* Connector line (except for the last step) */}
           {index < steps.length - 1 && (
@@ -47,5 +79,3 @@ const StepperHeader = ({ steps, activeStep = 1 }: StepperHeaderProps) => {
     </div>
   );
 };
-
-export default StepperHeader;
