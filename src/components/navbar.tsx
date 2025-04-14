@@ -7,7 +7,7 @@ export default function Navbar({ className }: { className: string }) {
   return (
     <div
       className={cn(
-        'flex justify-between items-center h-[64px] dark:bg-neutral-900 text-neutral-foreground backdrop-blur-sm px-4 mt-8 w-[70%] mx-auto rounded-lg shadow-md',
+        'flex justify-between items-center h-[64px] dark:bg-neutral-900/70 bg-neutral/70 text-neutral-foreground backdrop-blur-lg px-4 mt-8 w-[70%] mx-auto rounded-lg shadow-md',
         className,
       )}
     >
