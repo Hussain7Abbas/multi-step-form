@@ -1,16 +1,13 @@
 import React from 'react';
 
-const StepperHeader = () => {
-  const steps = [
-    { id: 1, name: 'Registration' },
-    { id: 2, name: 'Personal Information' },
-    { id: 3, name: 'Job Information' },
-  ];
+interface StepperHeaderProps {
+  steps: { id: number; name: string }[];
+  activeStep: number;
+}
 
-  const activeStep = 1;
-
+const StepperHeader = ({ steps, activeStep = 1 }: StepperHeaderProps) => {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between md:mx-16">
       {steps.map((step, index) => (
         <React.Fragment key={step.id}>
           <div className="flex flex-col items-center relative">
